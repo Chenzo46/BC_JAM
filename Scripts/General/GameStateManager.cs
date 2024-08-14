@@ -51,6 +51,8 @@ public class GameStateManager : MonoBehaviour
         }
 
         checkForPauseInput();
+        //Debug.Log($"Previous Room {previousRoom}");
+        //Debug.Log($"Current Room {currentRoom}");
     }
 
     private void checkForPauseInput(){
@@ -126,7 +128,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     public void setFloat(string name, float value){
-        gameFloats[name] = value;
+        gameFloats[name] = value; 
         SavedValueManager.Singleton.parseSaveableData(gameConditionsDict,gameFloats,gameStrings);
     }
 
@@ -142,6 +144,15 @@ public class GameStateManager : MonoBehaviour
     public void setString(string name, string value){
         gameStrings[name] = value;
         SavedValueManager.Singleton.parseSaveableData(gameConditionsDict,gameFloats,gameStrings);
+    }
+
+    public void setOnLeaveVariables(){
+        setFloat("current_scene", currentRoom);
+        setFloat("previous_scene", previousRoom);
+        setFloat("time_played", secondsPlayed);
+
+        currentRoom = 0;
+        previousRoom = 0;
     }
 
     public void startNewGameFile(int fileIndex){
@@ -165,7 +176,9 @@ public class GameStateManager : MonoBehaviour
         game_started = true;
         
         secondsPlayed = getFloat("time_played", 0);
+        currentRoom = (int)getFloat("current_scene", 0);
+        previousRoom = (int)getFloat("previous_scene", 0);
 
-        SceneTransitioner.Singleton.startGame(0);
+        SceneTransitioner.Singleton.startGame(currentRoom);
     }
 }

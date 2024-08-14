@@ -29,7 +29,15 @@ public class FileGUI : MonoBehaviour
         SavePresent.alpha =  isSaveDataPresent()? 1:0;
         noSavePresent.alpha = isSaveDataPresent() ? 0:1;
 
+        if(!isSaveDataPresent()){return;}
         lastAreaVisited.text = $"Area: {SavedValueManager.Singleton.getDirectString(filePath, "last_area")}";
+        
+        int seconds = (int)SavedValueManager.Singleton.getDirectFloat(filePath, "time_played");
+        int minutes = seconds/60;
+        int hours = minutes/60;
+
+
+        timePlayed.text = $"Time Played: {hours}H {minutes}M";
     }
 
     private bool isSaveDataPresent(){
@@ -40,7 +48,7 @@ public class FileGUI : MonoBehaviour
         continueButton.onClick.RemoveAllListeners();
         newGameButton.onClick.RemoveAllListeners();
 
-        continueButton.onClick.AddListener(() => { GameStateManager.Singleton.continueGameFile(fileIndex);});
+        continueButton.onClick.AddListener(() => { GameStateManager.Singleton.continueGameFile(fileIndex); MainMenuManager.Singleton.goToGame();});
         newGameButton.onClick.AddListener(() => { GameStateManager.Singleton.startNewGameFile(fileIndex); setVisibility(); setContext();});
 
         clearButton.interactable = isSaveDataPresent();

@@ -133,6 +133,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void mainMenu(){
         pauseStateMachine.ChangeState("To_Main");
+        GameStateManager.Singleton.setOnLeaveVariables();
         SceneTransitioner.Singleton.backToMain();
     }
 }

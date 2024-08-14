@@ -22,18 +22,7 @@ public class SavedValueManager : MonoBehaviour, ISaveData
     public static SavedValueManager Singleton;
 
     private void Awake() {
-
-        if(Singleton == null){
-            Singleton = this;
-            DontDestroyOnLoad(gameObject);
-
-            
-        }
-        else{
-            Destroy(gameObject);
-        }
-
-
+        Singleton = this;
     }
 
     public void save(){
@@ -46,6 +35,7 @@ public class SavedValueManager : MonoBehaviour, ISaveData
     public void load(){
         saveDataDirectory = getDirectoryRoot();
         string path = Path.Combine(mainSaveDataDirectory, "progression.json");
+        //Debug.Log(path);
 
         try{
             string collectionJsonData = File.ReadAllText(path);

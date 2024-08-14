@@ -138,7 +138,6 @@ public class MainMenuManager : MonoBehaviour
         return null;
     }
     public void goToGame(){
-        //playCutscene("To_Game");
         menuStateMachine.ChangeState("To_Game");
     }
 
