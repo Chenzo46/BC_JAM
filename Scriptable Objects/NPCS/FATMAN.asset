@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e41c9a5749993428b78a4ac037af91, type: 3}
+  m_Name: FATMAN
+  m_EditorClassIdentifier: 
+  speakSound: {fileID: 8300000, guid: 2e101df14fd995d42aacd0e7fa7742b1, type: 3}
+  npcName: Chuggo
+  dialogueStates:
+  - condition: after_catnip
+    priority: 3
+    paragraphs:
+    - Thanks for earlier man.
+    - Wanna eat some families with me?
+    completeOnEnd: 0
+    consumeItem: 0
+  - condition: has_catnip
+    priority: 2
+    paragraphs:
+    - wow thanks man.
+    - I suppose I won't eat your family.
+    completeOnEnd: 1
+    consumeItem: 1
+  - condition: chuggo_first
+    priority: 1
+    paragraphs:
+    - What are you waiting for man get me my catnip!
+    completeOnEnd: 0
+    consumeItem: 0
+  - condition: none
+    priority: 0
+    paragraphs:
+    - If you give me some catnip I would greatly appreciate it bub.
+    - I will eat your family otherwise.
+    completeOnEnd: 1
+    consumeItem: 0

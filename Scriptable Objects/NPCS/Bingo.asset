@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e41c9a5749993428b78a4ac037af91, type: 3}
+  m_Name: Bingo
+  m_EditorClassIdentifier: 
+  speakSound: {fileID: 8300000, guid: 2e101df14fd995d42aacd0e7fa7742b1, type: 3}
+  npcName: Bingo
+  dialogueStates:
+  - condition: none
+    priority: 0
+    paragraphs:
+    - Hey Guy
+    - I'm not moving from here just if you were wondering
+    completeOnEnd: 1
+  - condition: after_first_bingo
+    priority: 1
+    paragraphs:
+    - Oh you wanted to move past me?
+    - Wellllll sorry bub you gotta do a little something for me first...
+    completeOnEnd: 1
+  - condition: after_second_bingo
+    priority: 2
+    paragraphs:
+    - Well? Scram if you can't help me out!
+    completeOnEnd: 0
+  - condition: after_catnip
+    priority: 3
+    paragraphs:
+    - Hey guy thanks for helping my friend out earlier.
+    - Hmm maybe I'll let you pass..........
+    - In 500000 years! MUAHAHAHAHAHAHA!!!!!!
+    completeOnEnd: 0
