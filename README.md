@@ -6,4 +6,3 @@ puzzles, and completing platforming challenges, Jango can find his way to the to
 <h1> Why the heck was this game made </h1>
 This game started out as an entry to the <a href = "https://itch.io/jam/black-cat-jam-1">Black Cat Jam</a> but spiraled into a bigger idea as the prospect of adding a story and making a more "complete" game came to mind. I want to publish this game on steam as my first
 full game, and I think there is a lot to learn from creating a feature-complete game that can't be learned from small jam projects and prototypes. I've already learned a lot and there is still definitely a lot more to learn and implement as this project grows bigger.
-Progress is good so far, and I hope to have a demo out between the end of August and mid-September (Maybe a little optimistic since I'm starting college soon, but oh well).
