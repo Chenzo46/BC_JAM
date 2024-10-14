@@ -46,7 +46,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     private void Update(){
-        if(game_started && currentState == GameState.Play){
+        if(game_started){
             secondsPlayed += Time.deltaTime;
         }
 

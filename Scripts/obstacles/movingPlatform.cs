@@ -8,6 +8,11 @@ public class movingPlatform : MonoBehaviour
     [SerializeField] private MovementState selectedState; 
     [SerializeField] private float speed = 10f;
 
+    [SerializeField] private Transform boxCheckCenter;
+    [SerializeField] private Vector2 boxCheckBounds;
+
+    [SerializeField] private LayerMask playerMask;
+
     [Header("Circle Movement")]
     [SerializeField] private float range = 1f;
 
@@ -25,7 +30,7 @@ public class movingPlatform : MonoBehaviour
 
     private Vector2 lastPlatPos;
 
-
+    private float refBoxBoundsY;
 
     private enum MovementState
     {
@@ -38,6 +43,8 @@ public class movingPlatform : MonoBehaviour
     void Awake()
     {
         orgPos = transform.position;
+
+        refBoxBoundsY = boxCheckBounds.x;
 
         if(selectedState == MovementState.rectangle)
         {
@@ -73,15 +80,17 @@ public class movingPlatform : MonoBehaviour
     }
 
     private void LateUpdate() {
+        normalizeBoxCheckBounds();
         applyCounterForce();
     }
 
-    private void FixedUpdate(){
-        //applyCounterForce();
+    private void normalizeBoxCheckBounds(){
+        boxCheckBounds.y = refBoxBoundsY * ((1 + speed)/5);
+        boxCheckBounds.y = Mathf.Clamp(boxCheckBounds.y, 0.7f, 1.55f);
     }
 
     private void applyCounterForce(){
-        if(plrRigid == null){return;}
+        if(!playerOnPlatform()){return;}
 
         //plrRigid.AddForce(cData.getFixedDirection() * cData.speed * forceMultiplier, ForceMode2D.Force);
         Vector2 pChange = (Vector2)transform.position - lastPlatPos;
@@ -120,6 +129,10 @@ public class movingPlatform : MonoBehaviour
     private void circleMovement()
     {
         transform.position = orgPos + new Vector3(Mathf.Cos(Time.time * speed) * range, Mathf.Sin(Time.time * speed) * range);
+    }
+
+    private bool playerOnPlatform(){
+        return plrRigid != null && Physics2D.OverlapBox(boxCheckCenter.position, boxCheckBounds, 0f, playerMask);
     }
 
     private void rectangleMovement()
@@ -211,7 +224,6 @@ public class movingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //collision.transform.SetParent(transform);
 
         if (collision.transform.tag.Equals("player"))
         {
@@ -221,18 +233,17 @@ public class movingPlatform : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //collision.transform.SetParent(null);
-
         if (collision.transform.tag.Equals("player"))
         {
-            //throwDirection.x *= 2;
-            //plrRigid.AddForce(throwDirection, ForceMode2D.Impulse);
             plrRigid = null;
         }
     }
 
     private void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(boxCheckCenter.position, boxCheckBounds);
+
         if (selectedState == MovementState.circle && orgPos == Vector3.zero)
         {
             Gizmos.color = Color.yellow;
