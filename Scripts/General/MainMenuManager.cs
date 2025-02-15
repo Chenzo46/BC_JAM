@@ -161,6 +161,10 @@ public class MainMenuManager : MonoBehaviour
     public void goToRoom(int num){
         SceneTransitioner.Singleton.transitionScene(num);
     }
+
+    public void exitGame(){
+        Application.Quit();
+    }
     
 }
 
